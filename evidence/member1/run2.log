@@ -1,0 +1,42 @@
+
+PLAY [Deploy NairobiPulse] *****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [nairobipulse]
+
+TASK [Show facts gathered from the target] *************************************
+ok: [nairobipulse] => {
+    "msg": "Host Matthew runs Ubuntu 22.04 (Debian), kernel 5.15.153.1-microsoft-standard-WSL2"
+}
+
+TASK [Make sure this is a Debian-family host (uses facts)] *********************
+ok: [nairobipulse] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+
+TASK [Install Docker and the Python Docker SDK] ********************************
+ok: [nairobipulse]
+
+TASK [Enable and start Docker] *************************************************
+ok: [nairobipulse]
+
+TASK [Build the NairobiPulse image from the repo Dockerfile] *******************
+ok: [nairobipulse]
+
+TASK [Run the NairobiPulse container] ******************************************
+ok: [nairobipulse]
+
+TASK [Check the health endpoint returns 200] ***********************************
+ok: [nairobipulse]
+
+TASK [Show health response] ****************************************************
+ok: [nairobipulse] => {
+    "health.content": {
+        "status": "ok"
+    }
+}
+
+PLAY RECAP *********************************************************************
+nairobipulse               : ok=9    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
