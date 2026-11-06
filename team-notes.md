@@ -48,3 +48,7 @@ read-only, so they report ok.
 
 ## Destroy evidence
 (to be filled in at the end)
+
+## Member 1 destroy evidence
+- terraform destroy: evidence/member1/destroy-terraform.log (Destroy complete! Resources: 1 destroyed)
+- Container and image removed: evidence/member1/destroy-container.log (docker ps -a empty, /health refused)
