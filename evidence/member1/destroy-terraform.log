@@ -1,0 +1,43 @@
+[0m[1mlocal_file.inventory: Refreshing state... [id=4284074766569885a77869d5501844c418c891c4][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [31m-[0m destroy[0m
+
+Terraform will perform the following actions:
+
+[1m  # local_file.inventory[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "local_file" "inventory" {
+      [31m-[0m[0m content              = <<-EOT
+            [app]
+            nairobipulse ansible_host=127.0.0.1 ansible_user=matthew ansible_ssh_private_key_file=~/.ssh/devops-ansible
+            
+            [app:vars]
+            ansible_python_interpreter=/usr/bin/python3
+        EOT [90m-> null[0m[0m
+      [31m-[0m[0m content_base64sha256 = "BZuX4qArZZiRvARDZpxwkIlxcSGKfWywl0OmdkTEE/c=" [90m-> null[0m[0m
+      [31m-[0m[0m content_base64sha512 = "TH1aBCWf5k1EAJqxtTf6qGWa6SFsm/f+f3kePfgf2uSC15b10E4DhcnJtsCUAS+PLi48+NpI8ZuMXpqLecSUuQ==" [90m-> null[0m[0m
+      [31m-[0m[0m content_md5          = "8f08b17f40ce349d5f4a8a8518db6dc1" [90m-> null[0m[0m
+      [31m-[0m[0m content_sha1         = "4284074766569885a77869d5501844c418c891c4" [90m-> null[0m[0m
+      [31m-[0m[0m content_sha256       = "059b97e2a02b659891bc0443669c7090897171218a7d6cb09743a67644c413f7" [90m-> null[0m[0m
+      [31m-[0m[0m content_sha512       = "4c7d5a04259fe64d44009ab1b537faa8659ae9216c9bf7fe7f791e3df81fdae482d796f5d04e0385c9c9b6c094012f8f2e2e3cf8da48f19b8c5e9a8b79c494b9" [90m-> null[0m[0m
+      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m[0m
+      [31m-[0m[0m file_permission      = "0644" [90m-> null[0m[0m
+      [31m-[0m[0m filename             = "./../ansible/inventory.ini" [90m-> null[0m[0m
+      [31m-[0m[0m id                   = "4284074766569885a77869d5501844c418c891c4" [90m-> null[0m[0m
+    }
+
+[1mPlan:[0m [0m0 to add, 0 to change, 1 to destroy.
+
+Changes to Outputs:
+  [31m-[0m[0m inventory_path = "./../ansible/inventory.ini" [90m-> null[0m[0m
+[0m[1m
+Do you really want to destroy all resources?[0m
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  [1mEnter a value:[0m [0m
+[0m[1mlocal_file.inventory: Destroying... [id=4284074766569885a77869d5501844c418c891c4][0m[0m
+[0m[1mlocal_file.inventory: Destruction complete after 0s[0m
+[0m[1m[32m
+Destroy complete! Resources: 1 destroyed.[0m
