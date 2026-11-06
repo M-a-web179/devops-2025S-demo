@@ -1,0 +1,20 @@
+$ docker rm -f ubuntu-server-member2
+ubuntu-server-member2
+$ docker rmi ubuntu-ssh-server
+Untagged: ubuntu-ssh-server:latest
+Deleted: sha256:e40dc9d345e6c689d355bce82109cd909c9cb86d7deef3eb3636fa455969be9f
+Deleted: sha256:c4628c4c9987f5b9a879714fb6b8836445baa0e2669aa6d16415d95169a2a0d4
+Deleted: sha256:c6381bff492494644fa3b2c313294f9f21285d58a5e75ec70a061d4c19d1abc7
+Deleted: sha256:36e2d718a1a37cadbb314867932aea70c32d3fc130f9435730cbdd8b3e1f5fb3
+Deleted: sha256:c28455c7cf332ebb87a1c0fc8217567a89f6599906a05d3936d579782de6c5f6
+Deleted: sha256:212125e6b531ce95a73fee4de3ca0aff43f8208078edd6214a94d2f7ded128aa
+Deleted: sha256:a056a60d0b3f2553258702010d7a1b617a40f3aa50dabb103df06807daeec558
+$ docker volume rm ubuntu-server-member2-docker ubuntu-server-member2-containerd
+ubuntu-server-member2-docker
+ubuntu-server-member2-containerd
+$ docker ps -a --filter name=ubuntu-server-member2
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+$ docker images ubuntu-ssh-server
+IMAGE   ID             DISK USAGE   CONTENT SIZE   EXTRA
+$ curl -sS http://127.0.0.1:8000/health/
+curl: (7) Failed to connect to 127.0.0.1 port 8000 after 0 ms: Couldn't connect to server

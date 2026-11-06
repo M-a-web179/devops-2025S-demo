@@ -1,0 +1,6 @@
+local_file.inventory: Refreshing state... [id=861ebeb9ba0e361f37128ceb16d1e5ede3bd99b3]
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
