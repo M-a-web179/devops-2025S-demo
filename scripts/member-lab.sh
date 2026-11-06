@@ -18,6 +18,7 @@ EVIDENCE="$REPO/evidence/member${MEMBER}"
 SERVER_IMAGE="ubuntu-ssh-server"
 SERVER_NAME="ubuntu-server-member${MEMBER}"
 DOCKER_VOLUME="${SERVER_NAME}-docker"
+CONTAINERD_VOLUME="${SERVER_NAME}-containerd"
 
 # The inventory from Terraform has no port, so tell Ansible here.
 export ANSIBLE_REMOTE_PORT="$SSH_PORT"
@@ -40,11 +41,14 @@ up() {
     --build-arg SSH_USER="$SSH_USER" \
     --build-arg SSH_PUBKEY="$(cat "$SSH_KEY.pub")" \
     server/
+  # Start from a clean server every time
   docker rm -f "$SERVER_NAME" >/dev/null 2>&1 || true
+  docker volume rm "$DOCKER_VOLUME" "$CONTAINERD_VOLUME" >/dev/null 2>&1 || true
   docker run -d --name "$SERVER_NAME" --hostname "member${MEMBER}-server" \
     --privileged --cgroupns=host \
     -v /sys/fs/cgroup:/sys/fs/cgroup:rw --tmpfs /run --tmpfs /run/lock \
     -v "$DOCKER_VOLUME":/var/lib/docker \
+    -v "$CONTAINERD_VOLUME":/var/lib/containerd \
     -v "$REPO":"$REPO":ro \
     -p "$SSH_PORT":22 -p "$APP_PORT":"$APP_PORT" \
     "$SERVER_IMAGE"
@@ -92,7 +96,8 @@ destroy() {
   {
     echo "\$ docker rm -f $SERVER_NAME"; docker rm -f "$SERVER_NAME"
     echo "\$ docker rmi $SERVER_IMAGE";  docker rmi "$SERVER_IMAGE"
-    echo "\$ docker volume rm $DOCKER_VOLUME"; docker volume rm "$DOCKER_VOLUME"
+    echo "\$ docker volume rm $DOCKER_VOLUME $CONTAINERD_VOLUME"
+    docker volume rm "$DOCKER_VOLUME" "$CONTAINERD_VOLUME"
     echo "\$ docker ps -a --filter name=$SERVER_NAME"; docker ps -a --filter "name=$SERVER_NAME"
     echo "\$ docker images $SERVER_IMAGE"; docker images "$SERVER_IMAGE"
     echo "\$ curl -sS http://127.0.0.1:${APP_PORT}/health/"

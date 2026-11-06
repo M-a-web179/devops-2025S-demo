@@ -4,7 +4,7 @@
 | Member | Role | GitHub | Server | Status |
 |---|---|---|---|---|
 | 1 | Project Lead / Terraform Owner | M-a-web179 | local Ubuntu 22.04 (WSL2) | Deployed, destroy pending |
-| 2 | Member | HelloWorldVictor | Ubuntu 22.04 container (Docker on macOS) | In progress |
+| 2 | Member | HelloWorldVictor | Ubuntu 22.04 container (Docker on macOS) | Deployed + destroyed |
 | 3 | Member | Dominion Yusuf | | |
 | 4 | Member | Victor-VIO | | |
 
@@ -58,7 +58,7 @@ Everything is driven by `scripts/member-lab.sh` (`up`, then `destroy`).
 - terraform.tfvars: local only, gitignored, deleted on destroy
 - Terraform: evidence/member2/terraform-{init,validate,plan,apply}.log
 - Ping: evidence/member2/ping.txt
-- Run 1: evidence/member2/run1.log
+- Run 1: evidence/member2/run1.log (changed=4)
 - Run 2: evidence/member2/run2.log (changed=0)
 - Health: evidence/member2/health.txt (HTTP 200)
 
@@ -71,8 +71,8 @@ container whose config already matches. Nothing differs from the desired
 state, so every task reports ok and the recap shows changed=0.
 
 ## Member 2 destroy evidence
-- terraform destroy: evidence/member2/destroy-terraform.log
-- Container, image and Docker volume removed: evidence/member2/destroy-container.log
+- terraform destroy: evidence/member2/destroy-terraform.log (Destroy complete! Resources: 1 destroyed)
+- Container, image and Docker volumes removed: evidence/member2/destroy-container.log (docker ps -a empty, /health refused)
 
 ## Destroy evidence
 (to be filled in at the end)
