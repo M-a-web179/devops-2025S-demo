@@ -4,9 +4,9 @@
 | Member | Role | GitHub | Server | Status |
 |---|---|---|---|---|
 | 1 | Project Lead / Terraform Owner | M-a-web179 | local Ubuntu 22.04 (WSL2) | Deployed, destroy pending |
-| 2 | | | | |
-| 3 | | | | |
-| 4 | | | | |
+| 2 | Member | HelloWorldVictor | Ubuntu 22.04 container (Docker on macOS) | In progress |
+| 3 | Member | Dominion Yusuf | | |
+| 4 | Member | Victor-VIO | | |
 
 ## Checklist
 - [ ] All 4 members added to the repo
@@ -45,6 +45,34 @@ read-only, so they report ok.
 
 ## Members 2-4 evidence
 (each member adds their own section here)
+
+## Member 2 evidence (HelloWorldVictor)
+Server: Ubuntu 22.04 container on macOS (Docker via Colima), built from
+`server/Dockerfile`. It runs systemd + sshd, key-only login, passwordless
+sudo for the Ansible user. SSH on 127.0.0.1:2222, app on 127.0.0.1:8000.
+The repo is mounted at the same path inside the container because the
+playbook builds the image on the target from `{{ playbook_dir }}/..`.
+Everything is driven by `scripts/member-lab.sh` (`up`, then `destroy`).
+
+- SSH key: own ed25519 key `~/.ssh/devops-ansible-member2` (private key never committed)
+- terraform.tfvars: local only, gitignored, deleted on destroy
+- Terraform: evidence/member2/terraform-{init,validate,plan,apply}.log
+- Ping: evidence/member2/ping.txt
+- Run 1: evidence/member2/run1.log
+- Run 2: evidence/member2/run2.log (changed=0)
+- Health: evidence/member2/health.txt (HTTP 200)
+
+Why it is idempotent on this host: run 1 installs docker.io and
+python3-docker, builds the image and starts the container. On run 2 apt
+sees the packages are present, the Docker service is already started and
+enabled, the image already exists (docker_image with source: build only
+builds when the image is missing), and docker_container finds a running
+container whose config already matches. Nothing differs from the desired
+state, so every task reports ok and the recap shows changed=0.
+
+## Member 2 destroy evidence
+- terraform destroy: evidence/member2/destroy-terraform.log
+- Container, image and Docker volume removed: evidence/member2/destroy-container.log
 
 ## Destroy evidence
 (to be filled in at the end)
