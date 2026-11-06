@@ -1,0 +1,16 @@
+nairobipulse
+Untagged: nairobipulse:latest
+Deleted: sha256:e4247d9ad29451aeca4b13939ede324999bcd0d24c8bfc26ddb8a89a7d2a3a6c
+Deleted: sha256:abb2082148671f4a240e025ca87cd533a2b13bebc7fc85bb2ece7cfb00f3479f
+Deleted: sha256:7ac917eeae18f507b8f2daec11665833c3cef3b56d2b3aa60dacc6f5f9337b24
+Deleted: sha256:88db7b710bec5026f1421aaa30cf2bf3ae69ccb972e1dd96fa6f9e70c01d6183
+Deleted: sha256:6a1e304d031a36bd95b2b3cf98ab154cb2cf324126e8b4e2b74ce2e166cc4a6c
+Deleted: sha256:c659daae3a714fcf2c292ecea21e7d5999f5e039d1cad0d16469485ea0cf79d0
+Deleted: sha256:1b5c5549c25f17b4b80c75513680f595060c26deaaeb56271c3ebbd4a0b03785
+Deleted: sha256:24ee11d15cf3f8567b6da7ec6946d2b5920bee1f762a1ebcac7778d18dcf3e9b
+Deleted: sha256:cf20575c89ba155eca1930cfc5ac9413a4d943586a33b73d6bdef165a4aed8da
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (7) Failed to connect to 127.0.0.1 port 8000 after 0 ms: Connection refused
