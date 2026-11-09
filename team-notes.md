@@ -89,7 +89,8 @@ Evidence under evidence/member3:
 terraform-init.log, terraform-validate.log, terraform-plan.log,
 terraform-apply.log, ping.txt, run1.log, run2.log, health.txt, homepage.png,
 security.txt, firewall-test.txt, ansible-lint.txt, destroy-app.log,
-destroy-terraform.log, state-after-destroy.txt and destroy-server.log.
+destroy-terraform.log, state-after-destroy.txt, destroy-server.log,
+secret-scan.txt, pr.png, commit.png and review.png.
 
 Integration scope:
 - This team repo contains Campus Notifier. The test deploys its published demo
