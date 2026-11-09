@@ -59,4 +59,4 @@ jobs:
           directory: terraform
           framework: terraform
           quiet: true
-          soft_fail: true
+          soft_fail: false
