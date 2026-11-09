@@ -1,0 +1,13 @@
+---
+app_name: campus-notifier
+app_image: dominionyusuf/campus-event-notifier@sha256:1b5e0c52b782920d114bc452190cd3376764f93697476a0e59fbc3114855bf5e
+app_port: 8000
+app_container_port: 8000
+app_bind_address: "0.0.0.0"
+app_health_path: /health/
+app_env: {}
+app_volumes: []
+ssh_port: 22
+# Set ssh_allowed_cidr in the ignored local.yml before running.
+# Ubuntu containers need vfs for nested Docker. Cloud VMs retain Docker defaults.
+docker_nested: "{{ ansible_facts.virtualization_type in ['docker', 'container', 'containerd'] }}"

@@ -1,0 +1,74 @@
+---
+- name: Install firewall utilities
+  ansible.builtin.apt:
+    name:
+      - ufw
+      - iptables
+    state: present
+
+- name: Allow SSH from the operator CIDR before enabling the firewall
+  community.general.ufw:
+    rule: allow
+    port: "{{ ssh_port | string }}"
+    proto: tcp
+    from_ip: "{{ ssh_allowed_cidr }}"
+
+- name: Allow the application port
+  community.general.ufw:
+    rule: allow
+    port: "{{ app_port | string }}"
+    proto: tcp
+
+- name: Deny other incoming host traffic
+  community.general.ufw:
+    direction: incoming
+    policy: deny
+
+- name: Allow outgoing host traffic
+  community.general.ufw:
+    direction: outgoing
+    policy: allow
+
+- name: Enable the host firewall
+  community.general.ufw:
+    state: enabled
+
+- name: Install Docker forwarding firewall policy
+  ansible.builtin.template:
+    src: docker-firewall.sh.j2
+    dest: /usr/local/sbin/team-docker-firewall
+    owner: root
+    group: root
+    mode: "0750"
+  notify: Reload Docker firewall
+
+- name: Install persistent Docker firewall service
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/team-docker-firewall.service
+    mode: "0644"
+    content: |
+      [Unit]
+      Description=Restrict externally forwarded Docker traffic to the app port
+      Requires=docker.service
+      After=docker.service ufw.service
+      PartOf=docker.service
+
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/local/sbin/team-docker-firewall
+      RemainAfterExit=yes
+
+      [Install]
+      WantedBy=multi-user.target
+  register: firewall_unit
+  notify: Reload Docker firewall
+
+- name: Enable persistent Docker forwarding policy
+  ansible.builtin.systemd_service:
+    name: team-docker-firewall
+    daemon_reload: "{{ firewall_unit.changed }}"
+    enabled: true
+    state: started
+
+- name: Apply firewall policy before starting the app
+  ansible.builtin.meta: flush_handlers

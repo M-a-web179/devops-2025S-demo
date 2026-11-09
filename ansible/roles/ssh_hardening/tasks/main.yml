@@ -1,0 +1,25 @@
+---
+- name: Verify the connecting user has an authorized public key
+  ansible.builtin.stat:
+    path: "{{ ansible_facts.user_dir if ansible_user == 'root' else '/home/' ~ ansible_user }}/.ssh/authorized_keys"
+  register: ssh_hardening_authorized_keys
+
+- name: Require existing key access before hardening SSH
+  ansible.builtin.assert:
+    that:
+      - ssh_hardening_authorized_keys.stat.exists
+      - ssh_hardening_authorized_keys.stat.size | int > 0
+    fail_msg: Install your public key for the connecting sudo user before continuing.
+
+- name: Install validated SSH configuration
+  ansible.builtin.template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: "0600"
+    validate: /usr/sbin/sshd -t -f %s
+  notify: Restart SSH
+
+- name: Apply validated SSH hardening
+  ansible.builtin.meta: flush_handlers

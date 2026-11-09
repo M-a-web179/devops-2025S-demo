@@ -1,0 +1,18 @@
+#!/bin/sh
+set -eu
+# Docker published ports bypass UFW INPUT rules, so filter forwarding as well.
+for tool in iptables ip6tables; do
+    # An IPv6 forwarding chain exists only when Docker IPv6 is enabled.
+    if [ "$tool" = ip6tables ] && ! "$tool" -S DOCKER-USER >/dev/null 2>&1; then
+        continue
+    fi
+    "$tool" -N TEAM-APP 2>/dev/null || true
+    "$tool" -F TEAM-APP
+    "$tool" -A TEAM-APP -m conntrack --ctstate ESTABLISHED,RELATED -j RETURN
+    "$tool" -A TEAM-APP -i docker+ -j RETURN
+    "$tool" -A TEAM-APP -i br+ -j RETURN
+    "$tool" -A TEAM-APP -p tcp -m conntrack --ctdir ORIGINAL --ctorigdstport {{ app_port }} -j RETURN
+    "$tool" -A TEAM-APP -m conntrack --ctdir ORIGINAL -j DROP
+    "$tool" -A TEAM-APP -j RETURN
+    "$tool" -C DOCKER-USER -j TEAM-APP 2>/dev/null || "$tool" -I DOCKER-USER 1 -j TEAM-APP
+done

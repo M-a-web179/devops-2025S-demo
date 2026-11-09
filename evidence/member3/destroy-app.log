@@ -1,0 +1,15 @@
+campus-notifier
+Untagged: dominionyusuf/campus-event-notifier@sha256:1b5e0c52b782920d114bc452190cd3376764f93697476a0e59fbc3114855bf5e
+Deleted: sha256:49462fe5ab217598c403dfdb1066eadc6885da61b0de822d48372447ffd49329
+Deleted: sha256:893c3216c351b87eda77b7e1073bc577c2fbb68bba99f3bd830e2d3fac726ef5
+Deleted: sha256:84546d2c1fa411637f99e085cfdb1d6330d9bdd45237ae23d78c7b844bc2cd39
+Deleted: sha256:c1b3764c0c5174d4ce0e3557e7aef66ac056c0c263fc24f36554a75491add9d4
+Deleted: sha256:31a11abac2976f9154324e9510c3c5f3305c646aab2d87278d02a6c488386c96
+Deleted: sha256:7fcddbac49f6dae32f269b970819ef29207d370b4a02986ffbeb5502735b7cb1
+Deleted: sha256:11f1ef92af1a6f06062dea5b92ef10f0cacfedd2ef65e80b2adfeafce0b9c5ee
+Deleted: sha256:3c6385c73bf3399791c31fa21d4a5a1704a1eac23b3147c04514f69958ca08cb
+Deleted: sha256:58a0eb73a788ceae9f42e7189ca1d91ad96735d79b09c8b422c65bc8ae93c83c
+Deleted: sha256:685889762157cefb6370119253b3c709f70bb2622402052065c92243e3d9105f
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+IMAGE   ID             DISK USAGE   CONTENT SIZE   EXTRA
+WARNING: This output is designed for human readability. For machine-readable output, please use --format.

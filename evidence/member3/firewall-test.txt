@@ -1,0 +1,2 @@
+App port 8000 from a separate container: 200
+Unapproved Docker port 9000 blocked: URLError

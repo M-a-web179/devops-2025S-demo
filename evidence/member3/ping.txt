@@ -1,0 +1,4 @@
+nairobipulse | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}

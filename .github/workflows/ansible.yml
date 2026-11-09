@@ -1,0 +1,22 @@
+name: Ansible
+on:
+  pull_request:
+    paths:
+      - "ansible/**"
+      - ".github/workflows/ansible.yml"
+  push:
+    branches:
+      - "feature/member-3"
+permissions:
+  contents: read
+jobs:
+  ansible-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install ansible-lint==26.11.0
+      - run: ansible-galaxy collection install -r ansible/requirements.yml
+      - run: ansible-lint ansible/site.yml ansible/playbook.yml ansible/roles

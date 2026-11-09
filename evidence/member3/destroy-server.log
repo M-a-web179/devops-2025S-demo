@@ -1,0 +1,12 @@
+f3-member3-server
+Untagged: f3-member3-ubuntu:test
+Deleted: sha256:530b8a5c21482091cfcdc69b85898e870d16f1bdbaa1bb2ee9b64e1b7e3180ba
+
+Remaining member server containers
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+Remaining member fixture images
+IMAGE   ID             DISK USAGE   CONTENT SIZE   EXTRA
+
+Health after teardown
+curl: (7) Failed to connect to 127.0.0.1 port 8000 after 0 ms: Couldn't connect to server

@@ -1,0 +1,85 @@
+
+PLAY [Configure and deploy the team application] *******************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [nairobipulse]
+
+TASK [Verify supported host and safe deployment settings] **********************
+ok: [nairobipulse] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+
+TASK [docker : Install Docker and deployment dependencies] *********************
+ok: [nairobipulse]
+
+TASK [docker : Create Docker configuration directory] **************************
+ok: [nairobipulse]
+
+TASK [docker : Configure storage for Docker inside the lab server] *************
+ok: [nairobipulse]
+
+TASK [docker : Enable and start Docker] ****************************************
+ok: [nairobipulse]
+
+TASK [docker : Apply Docker configuration before deployment] *******************
+
+TASK [ssh_hardening : Verify the connecting user has an authorized public key] ***
+ok: [nairobipulse]
+
+TASK [ssh_hardening : Require existing key access before hardening SSH] ********
+ok: [nairobipulse] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+
+TASK [ssh_hardening : Install validated SSH configuration] *********************
+ok: [nairobipulse]
+
+TASK [ssh_hardening : Apply validated SSH hardening] ***************************
+
+TASK [firewall : Install firewall utilities] ***********************************
+ok: [nairobipulse]
+
+TASK [firewall : Allow SSH from the operator CIDR before enabling the firewall] ***
+ok: [nairobipulse]
+
+TASK [firewall : Allow the application port] ***********************************
+ok: [nairobipulse]
+
+TASK [firewall : Deny other incoming host traffic] *****************************
+ok: [nairobipulse]
+
+TASK [firewall : Allow outgoing host traffic] **********************************
+ok: [nairobipulse]
+
+TASK [firewall : Enable the host firewall] *************************************
+ok: [nairobipulse]
+
+TASK [firewall : Install Docker forwarding firewall policy] ********************
+ok: [nairobipulse]
+
+TASK [firewall : Install persistent Docker firewall service] *******************
+ok: [nairobipulse]
+
+TASK [firewall : Enable persistent Docker forwarding policy] *******************
+ok: [nairobipulse]
+
+TASK [firewall : Apply firewall policy before starting the app] ****************
+
+TASK [app : Pull the configured application image] *****************************
+ok: [nairobipulse]
+
+TASK [app : Run the application with its declared configuration] ***************
+ok: [nairobipulse]
+
+TASK [app : Wait for an HTTP 200 health response] ******************************
+ok: [nairobipulse]
+
+TASK [app : Report application health] *****************************************
+ok: [nairobipulse] => {
+    "msg": "HTTP 200 {\"status\": \"ok\"}"
+}
+
+PLAY RECAP *********************************************************************
+nairobipulse               : ok=22   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0

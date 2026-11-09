@@ -1,0 +1,24 @@
+---
+- name: Configure and deploy the team application
+  hosts: app
+  become: true
+  gather_facts: true
+  pre_tasks:
+    - name: Verify supported host and safe deployment settings
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.distribution == 'Ubuntu'
+          - ansible_facts.service_mgr == 'systemd'
+          - ansible_user != 'root'
+          - app_image | length > 0
+          - app_port | int > 0
+          - app_port | int < 65536
+          - ssh_port | int != app_port | int
+          - ssh_allowed_cidr | default('') | length > 0
+          - ssh_allowed_cidr not in ['0.0.0.0/0', '::/0']
+        fail_msg: Use an Ubuntu systemd host, a sudo user with SSH key access, and valid image/port settings.
+  roles:
+    - role: docker
+    - role: ssh_hardening
+    - role: firewall
+    - role: app

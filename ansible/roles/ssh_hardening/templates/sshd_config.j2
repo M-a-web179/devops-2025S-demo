@@ -1,0 +1,14 @@
+# Managed by Ansible.
+Port {{ ssh_port }}
+PermitRootLogin no
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+PubkeyAuthentication yes
+AuthenticationMethods publickey
+UsePAM yes
+X11Forwarding no
+PermitEmptyPasswords no
+MaxAuthTries 3
+AllowUsers {{ ansible_user }}
+AuthorizedKeysFile .ssh/authorized_keys
+Subsystem sftp /usr/lib/openssh/sftp-server

@@ -1,0 +1,37 @@
+local_file.inventory: Refreshing state... [id=fb458835054bef790e1a9b5cacad85f0e3e4403c]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # local_file.inventory will be destroyed
+  - resource "local_file" "inventory" {
+      - content              = <<-EOT
+            [app]
+            nairobipulse ansible_host=127.0.0.1 ansible_user=devops ansible_ssh_private_key_file=/Users/dominionyusuf/.ssh/sokosmart-f3-member3
+
+            [app:vars]
+            ansible_python_interpreter=/usr/bin/python3
+        EOT -> null
+      - content_base64sha256 = "ML73Fk0+PHLOn/dTZGRi1/8w+aqDfv1LoDDot2TLmco=" -> null
+      - content_base64sha512 = "7ayBpHGybdJfU6BAjRbqhSqHQOSuj23OOroIkR5MZHDqj3Vf7Q+lHZwtmlyrTAuMCSQLiQkxVrFeh1nybZR70g==" -> null
+      - content_md5          = "821d6b230ed1abc2c58b801159051b7f" -> null
+      - content_sha1         = "fb458835054bef790e1a9b5cacad85f0e3e4403c" -> null
+      - content_sha256       = "30bef7164d3e3c72ce9ff753646462d7ff30f9aa837efd4ba030e8b764cb99ca" -> null
+      - content_sha512       = "edac81a471b26dd25f53a0408d16ea852a8740e4ae8f6dce3aba08911e4c6470ea8f755fed0fa51d9c2d9a5cab4c0b8c09240b89093156b15e8759f26d947bd2" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0644" -> null
+      - filename             = "./../ansible/inventory.ini" -> null
+      - id                   = "fb458835054bef790e1a9b5cacad85f0e3e4403c" -> null
+    }
+
+Plan: 0 to add, 0 to change, 1 to destroy.
+
+Changes to Outputs:
+  - inventory_path = "./../ansible/inventory.ini" -> null
+local_file.inventory: Destroying... [id=fb458835054bef790e1a9b5cacad85f0e3e4403c]
+local_file.inventory: Destruction complete after 0s
+
+Destroy complete! Resources: 1 destroyed.

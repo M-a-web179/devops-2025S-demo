@@ -1,0 +1,15 @@
+WARNING: PATH altered to include /Users/dominionyusuf/ALU/DevOps/ansible-tools/bin, /Users/dominionyusuf/ALU/DevOps/ansible-tools/bin :: This is usually a sign of broken local setup, which can cause unexpected behaviors.
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: oneline has been deprecated. Use another callback plugin, or vendor and/or move the oneline callback to a collection. This feature will be removed from ansible-core version 2.23.
+Origin: <unknown>
+
+oneline
+
+[DEPRECATION WARNING]: tree has been deprecated. Use another callback plugin, or vendor and/or move the tree callback to a collection. This feature will be removed from ansible-core version 2.23.
+Origin: <unknown>
+
+tree
+
+WARNING  Directory expansion discovered 9 file(s). If this is more than expected, use 'exclude_paths' in your ansible-lint configuration to narrow the scope. See: https://docs.ansible.com/projects/lint/configuring/
+
+Passed: 0 failure(s), 0 warning(s) in 15 files processed of 16 encountered. Last profile that met the validation criteria was 'production'.

@@ -212,3 +212,9 @@ __marimo__/
 *.tfvars
 *.pem
 *.key
+
+# Generated deployment inventory and local secrets
+ansible/inventory.ini
+ansible/group_vars/local.yml
+ansible/local.yml
+*.retry

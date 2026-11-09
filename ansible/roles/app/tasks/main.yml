@@ -1,0 +1,46 @@
+---
+- name: Pull the configured application image
+  community.docker.docker_image:
+    name: "{{ app_image }}"
+    source: pull
+    force_source: false
+
+- name: Run the application with its declared configuration
+  community.docker.docker_container:
+    name: "{{ app_name }}"
+    image: "{{ app_image }}"
+    state: started
+    restart_policy: unless-stopped
+    published_ports:
+      - "{{ app_bind_address }}:{{ app_port }}:{{ app_container_port }}"
+    env: "{{ app_env }}"
+    volumes: "{{ app_volumes }}"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:{{ app_container_port }}{{ app_health_path }}', timeout=5)"
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    log_driver: json-file
+    log_options:
+      max-size: 10m
+      max-file: "3"
+  no_log: true
+
+- name: Wait for an HTTP 200 health response
+  ansible.builtin.uri:
+    url: "http://127.0.0.1:{{ app_port }}{{ app_health_path }}"
+    status_code: 200
+    return_content: true
+  register: app_health
+  until: app_health.status | default(0) == 200
+  retries: 20
+  delay: 3
+
+- name: Report application health
+  ansible.builtin.debug:
+    msg: "HTTP {{ app_health.status }} {{ app_health.content }}"

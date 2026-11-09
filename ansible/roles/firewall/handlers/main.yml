@@ -1,0 +1,5 @@
+---
+- name: Reload Docker firewall
+  ansible.builtin.systemd_service:
+    name: team-docker-firewall
+    state: restarted

@@ -1,0 +1,24 @@
+permitrootlogin no
+passwordauthentication no
+kbdinteractiveauthentication no
+allowusers devops
+authenticationmethods publickey
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    172.17.0.1
+8000/tcp                   ALLOW IN    Anywhere
+8000/tcp (v6)              ALLOW IN    Anywhere (v6)
+
+-N TEAM-APP
+-A TEAM-APP -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
+-A TEAM-APP -i docker+ -j RETURN
+-A TEAM-APP -i br+ -j RETURN
+-A TEAM-APP -p tcp -m conntrack --ctorigdstport 8000 --ctdir ORIGINAL -j RETURN
+-A TEAM-APP -m conntrack --ctdir ORIGINAL -j DROP
+-A TEAM-APP -j RETURN
+campus-notifier Up 38 seconds (healthy)
