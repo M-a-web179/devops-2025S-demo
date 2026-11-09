@@ -31,7 +31,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  
   image:
     name: image (trivy)
     runs-on: ubuntu-latest
@@ -39,7 +38,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build image
         run: docker build -t campus-notifier:ci .
-            - name: Trivy scan
+      - name: Trivy scan
         run: |
           docker run --rm \
             -v /var/run/docker.sock:/var/run/docker.sock \
@@ -49,7 +48,6 @@ jobs:
             --format table \
             campus-notifier:ci
 
-  
   iac:
     name: iac (checkov)
     runs-on: ubuntu-latest
