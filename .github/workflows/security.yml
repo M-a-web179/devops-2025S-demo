@@ -43,8 +43,9 @@ jobs:
           docker run --rm \
             -v /var/run/docker.sock:/var/run/docker.sock \
             aquasec/trivy:latest image \
-            --severity HIGH,CRITICAL \
-            --exit-code 0 \
+            --severity CRITICAL \
+            --ignore-unfixed \
+            --exit-code 1 \
             --format table \
             campus-notifier:ci
 
